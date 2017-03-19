@@ -12,14 +12,14 @@ dependencies:
 test:
   override:
     - docker-compose up -d
-    - docker-compose run dockerapp2 python test.py
+    - docker-compose run dockerapp python test.py
 
 deployment:
   hub:
     branch: [circle_ci_publish, master]
     commands:
       - docker login -e $DOCKER_HUB_EMAIL -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
-      - docker tag dockerapp2_dockerapp2 $DOCKER_HUB_USER_ID/dockerapp2:$CIRCLE_SHA1
-      - docker tag dockerapp2_dockerapp2 $DOCKER_HUB_USER_ID/dockerapp2:latest
-      - docker push $DOCKER_HUB_USER_ID/dockerapp2:$CIRCLE_SHA1
-      - docker push $DOCKER_HUB_USER_ID/dockerapp2:latest
+      - docker tag dockerapp2_dockerapp $DOCKER_HUB_USER_ID/dockerapp:$CIRCLE_SHA1
+      - docker tag dockerapp2_dockerapp $DOCKER_HUB_USER_ID/dockerapp:latest
+      - docker push $DOCKER_HUB_USER_ID/dockerapp:$CIRCLE_SHA1
+      - docker push $DOCKER_HUB_USER_ID/dockerapp:latest
